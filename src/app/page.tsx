@@ -1,102 +1,200 @@
-import Image from "next/image";
+'use client'
+import Link from "next/link";
+import  Image from "next/image";
+import PlaceImg from "../../public/placeholder-img.png"
+import { ChangeEvent, useState } from "react";
+
+interface UserProps {
+  name: string;
+  cpf: string;
+  phone: string;
+  insurance: string;
+}
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const [specialty, setSpecialty] = useState("");
+const [professional, setProfessional] = useState("");
+const [date, setDate] = useState("");
+const [name, setName] = useState(""); 
+const [cpf, setCpf] = useState("");
+const [phone, setPhone] = useState("");
+const [insurance, setInsurance] = useState("");
+const [user,setUser] = useState<UserProps>({name:"", cpf:"", phone:"", insurance:""});
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+const specialties = [
+  { id: 1, name: "Ortodontia" },
+  { id: 2, name: "Endodontia" },
+  { id: 3, name: "Periodontia" }
+];
+
+const professionals = [
+  { id: 1, name: "Dr. João Silva", specialty: "Ortodontia" },
+  { id: 2, name: "Dra. Maria Oliveira", specialty: "Endodontia" },
+  { id: 3, name: "Dr. Carlos Souza", specialty: "Periodontia" },
+  { id: 4, name: "Dra. Ana Costa", specialty: "Ortodontia" },
+  { id: 5, name: "Dr. Pedro Lima", specialty: "Endodontia" },
+  { id: 6, name: "Dra. Fernanda Rocha", specialty: "Periodontia" },
+  { id: 7, name: "Dr. Lucas Pereira", specialty: "Ortodontia" },
+  { id: 8, name: "Dra. Juliana Fernandes", specialty: "Endodontia" },
+  { id: 9, name: "Dr. Rafael Gomes", specialty: "Periodontia" },
+];
+
+const handleUserSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  setUser({name, cpf, phone, insurance});
+}
+
+  return (
+    <div className="font-sans bg-linear-to-r from-zinc-200 via-zinc-50 to-zinc-300 min-h-screen scroll-smooth">
+      <header className="w-full py-3 px-10 shadow-lg flex justify-between items-center bg-zinc-50">
+        <h1 className="text-3xl font-bold">Odonto</h1>
+        <nav className="flex gap-5 font-semibold">
+          <Link href="/">Home</Link>
+          <Link href="/#profissionais">Profissionais</Link>
+          <Link href="/#agendamento" className="scroll-smooth">Agendamento</Link>
+          <Link href="/agendamento">Acompanhar Agendamento</Link>
+        </nav>
+      </header>
+
+      <main className="py-10 my-10 mx-auto">
+        <section className="max-w-7xl p-10 m-auto">
+          <div className="flex gap-1">
+          <Image src={PlaceImg} alt="Placeholder Image" width={600} height={400} />
+          <div className="p-5">
+            <h2 className="text-4xl font-bold mb-4">Welcome to Odonto</h2>
+            <p className="text-lg leading-8">Your comprehensive solution for managing dental clinic operations efficiently.</p>
+            <p className="text-lg leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, cupiditate? Numquam ipsa dolore aperiam libero ipsam sapiente obcaecati expedita aliquam minus hic doloribus mollitia eaque, repellendus, veritatis non commodi amet quos minima quis exercitationem distinctio dolor velit?</p>
+          </div>
+          </div>
+        </section>
+
+        <div className="w-full bg-zinc-50 py-10">
+          <section id="profissionais" className="max-w-7xl p-10 mb-10 mx-auto">
+            <h2 className="text-3xl font-bold mb-4 text-center">Nossos Profissionais</h2>
+              <p className="text-lg leading-8 text-center">Detalhes dos profissionais serão exibidos aqui.</p>
+            <div className="flex gap-5 mt-10 justify-center">
+              {professionals.map((pro, i) => 
+              <div key={i} className="w-42 h-42 text-center">
+                <Image src={PlaceImg} alt="Placeholder Image" width={150} height={150} />
+                <p className="text-md mt-3 font-bold">{pro.name}</p>
+                <span className="text-xs font-light">{pro.specialty}</span>
+              </div>
+            )}
+            </div>
+          </section>
         </div>
+
+        <section id="agendamento" className="max-w-7xl p-10 my-10 mx-auto">
+          <h2 className="text-3xl font-bold mb-4 text-center">Agendamento</h2>
+          <p className="text-lg leading-8 text-center">Informações sobre agendamentos serão exibidas aqui.</p>
+
+          <div className="flex gap-5 justify-around py-10">
+            <form className="w-full shadow-lg p-5 rounded flex flex-col justify-between">
+              <div className="flex flex-col">
+                <div>
+                  <label className="block mb-2">Especialidade</label>
+                  <select className="w-full p-2 border border-gray-300 rounded mb-4" 
+                  onChange={(e:ChangeEvent<HTMLSelectElement>) => setSpecialty(e.target.value)}>
+                    <option>Selecione uma especialidade</option>
+                    {specialties.map((spec, i) => <option key={i} value={spec.name}>{spec.name}</option>)}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block mb-2">Profissional</label>
+                  <select className={`w-full p-2 border border-gray-300 rounded mb-4 ${!specialty ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                    disabled={!specialty}
+                    onChange={(e:ChangeEvent<HTMLSelectElement>) => setProfessional(e.target.value)}>
+                    <option>Selecione um profissional</option>
+                    {
+                    specialty && professionals
+                      .filter(pro => pro.specialty === specialty)
+                      .map((pro, i) => <option key={i} value={pro.name}>{pro.name}</option>)
+                    }
+                  </select>
+                </div>
+
+                <div>
+                    <label>Data</label>
+                    <input 
+                      type="date" 
+                      className={`w-full p-2 border border-gray-300 rounded mb-4 ${!professional ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                      disabled={!professional}
+                      onChange={(e:ChangeEvent<HTMLInputElement>) => setDate(e.target.value)}
+                      />
+                </div>
+              </div>
+
+              <input 
+                type="submit" 
+                value="Agendar" 
+                className={`bg-blue-500 w-full text-white px-4 py-2 mb-5 rounded cursor-pointer hover:bg-blue-600 ${!date ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={!date}
+              />
+            </form>
+
+            <form onSubmit={handleUserSubmit} className="shadow-lg p-5 w-full">
+              <div>
+                <label className="block mb-2">Nome</label>
+                <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                className="w-full p-2 border border-gray-300 rounded mb-4"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2">CPF</label>
+                <input 
+                type="text" 
+                name="cpf" 
+                id="cpf" 
+                className="w-full p-2 border border-gray-300 rounded mb-4"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setCpf(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2">Telefone</label>
+                <input 
+                type="text" 
+                name="phone" 
+                id="phone" 
+                className="w-full p-2 border border-gray-300 rounded mb-4"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2">Convênio</label>
+                <input 
+                type="text" 
+                name="insurance" 
+                id="insurance" 
+                className="w-full p-2 border border-gray-300 rounded mb-4"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setInsurance(e.target.value)}
+                />
+              </div>
+
+              <input type="submit" value="Salvar" className="bg-blue-500 text-white w-full px-4 py-2 mb-5 rounded cursor-pointer hover:bg-blue-600"/>
+            </form>
+
+            <div className="w-full shadow-lg p-5 rounded-lg">
+              <h3 className="text-xl font-bold mb-4">Resumo do Agendamento</h3>
+              <p className="text-lg leading-8">Especialidade: {specialty || 'N/A'}</p>
+              <p className="text-lg leading-8">Profissional: {professional || 'N/A'}</p>
+              <p className="text-lg leading-8">Horário: {date || 'N/A'}</p>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer>
+        <div className="w-full py-5 px-10 bg-zinc-50 text-center">
+          <p className="text-sm text-blue-500">&copy; 2026 Odonto. Todos direitos reservados.</p>
+        </div>
       </footer>
     </div>
   );
